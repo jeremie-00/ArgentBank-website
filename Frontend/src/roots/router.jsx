@@ -1,8 +1,10 @@
 import { createBrowserRouter, defer } from 'react-router-dom';
 
 import RootOutlet from "./rootOutlet";
-import Home from "@pages/home"
-import SignIn from "@pages/sign-in"
+import Header from "@layouts/header";
+import Home from "@pages/home";
+import SignIn from "@pages/sign-in";
+import User from "@pages/user";
 
 export default function Router() {
 
@@ -10,20 +12,19 @@ export default function Router() {
         {
             path: '/',
             element: <RootOutlet />,
-            //affiche la page erreur si une erreur est capturée (url ou composent)
             errorElement: <div>error</div>,
             children: [
                 {
                     path: '/',
-                    element: <Home />,
+                    element: <><Header /><Home /></> ,
                 },
                 {
                     path: '/sign-in',
-                    element: <SignIn />,
+                    element:<><Header /><SignIn /></>,
                 },
                 {
                     path: '/user',
-                    element: <div>users</div>,
+                    element: <><Header /><User /></> ,
                 },
             ]
         }
