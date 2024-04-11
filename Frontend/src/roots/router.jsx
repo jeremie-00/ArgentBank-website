@@ -2,6 +2,7 @@ import { createBrowserRouter, defer } from 'react-router-dom';
 
 import RootOutlet from "./rootOutlet";
 import Home from "@pages/home"
+import SignIn from "@pages/sign-in"
 
 export default function Router() {
 
@@ -18,10 +19,12 @@ export default function Router() {
                 },
                 {
                     path: '/sign-in',
-                    element: <div>sign in</div>,
+                    element: <SignIn />,
                 },
-
-
+                {
+                    path: '/user',
+                    element: <div>users</div>,
+                },
             ]
         }
     ])
