@@ -15,6 +15,10 @@ export default function Router() {
                     path: '/',
                     element: <div>home</div>,
                 },
+                {
+                    path: '/sign-in',
+                    element: <div>sign in</div>,
+                },
 
 
             ]
