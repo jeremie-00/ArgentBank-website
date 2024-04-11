@@ -1,6 +1,7 @@
 import { createBrowserRouter, defer } from 'react-router-dom';
 
 import RootOutlet from "./rootOutlet";
+import Home from "@pages/home"
 
 export default function Router() {
 
@@ -13,7 +14,7 @@ export default function Router() {
             children: [
                 {
                     path: '/',
-                    element: <div>home</div>,
+                    element: <Home />,
                 },
                 {
                     path: '/sign-in',
