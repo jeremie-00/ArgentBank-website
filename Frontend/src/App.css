@@ -77,6 +77,32 @@ body,
   padding: 2rem 0 1.5rem;
 }
 
+.features {
+  display: flex;
+  flex-direction: column;
+}
+.features .feature-icon {
+  width: 100px;
+  border: 10px solid #00bc77;
+  border-radius: 50%;
+  padding: 1rem;
+}
+.features .feature-item {
+  flex: 1;
+  padding: 2.5rem;
+}
+.features .feature-item-title {
+  color: #222;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 920px) {
+  .features {
+    flex-direction: row;
+  }
+}
 .hero {
   background-image: url("../src/assets/img/bank-tree.webP");
   background-position: 0 -50px;
@@ -121,32 +147,6 @@ body,
   }
   .hero .hero-content .text {
     font-size: 1.2rem;
-  }
-}
-.features {
-  display: flex;
-  flex-direction: column;
-}
-.features .feature-icon {
-  width: 100px;
-  border: 10px solid #00bc77;
-  border-radius: 50%;
-  padding: 1rem;
-}
-.features .feature-item {
-  flex: 1;
-  padding: 2.5rem;
-}
-.features .feature-item-title {
-  color: #222;
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-@media (min-width: 920px) {
-  .features {
-    flex-direction: row;
   }
 }
 .sign-in-content {
