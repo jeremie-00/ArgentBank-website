@@ -1,4 +1,9 @@
 import Account from '@components/account'
+import { userProfiles } from '../redux/actions/userProfile';
+import { login } from '../redux/reducers/loginReducer';
+import { userProfile } from '../redux/reducers/userReducer';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export default function User() {
 
@@ -20,9 +25,26 @@ export default function User() {
         }
     ]
 
+    const dispatch = useDispatch()
+    const token = useSelector((state) => state.auth.token)
+    const userData = () => {
+        dispatch(userProfiles({ token: token }))
+            .then((response) => {
+
+                dispatch(login(response.payload.body.userName))
+                dispatch(userProfile(response.payload))
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la récupération du profil utilisateur :", error.message);
+            });
+    };
+    userData()
+
+    const name = useSelector((state) => state.user.userName)
+
     return <main className="main bg-dark">
         <div className="header">
-            <h1>Welcome back<br />Tony Jarvis!</h1>
+            <h1>Welcome back<br />{name}</h1>
             <button className="edit-button">Edit Name</button>
         </div>
         <h2 className="sr-only">Accounts</h2>

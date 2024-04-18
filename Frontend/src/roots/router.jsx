@@ -1,5 +1,7 @@
 import { createBrowserRouter, defer } from 'react-router-dom';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import RootOutlet from "./rootOutlet";
 import Home from "@pages/home";
 import SignIn from "@pages/sign-in";
@@ -15,15 +17,16 @@ export default function Router() {
             children: [
                 {
                     path: '/',
-                    element: <Home /> ,
+                    element: <Home />,
                 },
                 {
                     path: '/sign-in',
-                    element:<SignIn />,
+                    element: <SignIn />,
                 },
                 {
                     path: '/user',
-                    element: <User /> ,
+                    element: <User />,
+ 
                 },
             ]
         }
