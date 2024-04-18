@@ -8,13 +8,14 @@ import { clearUserProfil } from '../redux/reducers/userReducer';
 export default function Header() {
 
     const isLogin = useSelector((state) => state.login.isLoggedIn)
+
     const dispatch = useDispatch()
-    console.log(isLogin)
+
     const handleLogout = () => {
         dispatch(logout())
         dispatch(clearToken())
         dispatch(clearUserProfil())
-    };
+    }
 
     return <nav className="main-nav">
         <Link className="main-nav-logo" to="/">
@@ -46,7 +47,6 @@ export default function Header() {
                     </Link>
                 </>
             )}
-
         </div>
     </nav>
 }

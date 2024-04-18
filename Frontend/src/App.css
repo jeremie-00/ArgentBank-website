@@ -39,6 +39,11 @@ body,
   /* 3 */
 }
 
+.error {
+  color: red;
+  margin-top: 15px;
+}
+
 .main-nav {
   display: flex;
   flex-direction: row;
