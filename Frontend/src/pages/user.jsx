@@ -3,7 +3,7 @@ import Account from '@components/account'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { userProfiles } from '../redux/actions/userProfile';
-import { login } from '../redux/reducers/loginReducer';
+import { login, updateLogName } from '../redux/reducers/loginReducer';
 import { userProfile, updateUserName } from '../redux/reducers/userReducer';
 import { editName, exitEditName } from '../redux/reducers/editReducer';
 import { useEffect } from 'react';
@@ -57,6 +57,7 @@ export default function User() {
         e.preventDefault()
         const newUserName = e.target[0].value
         dispatch(updateUserName(newUserName))
+        dispatch(updateLogName(newUserName))
         dispatch(editUserName({ token: token, newName: newUserName }))
             .then((response) => {
                 console.log(response)

@@ -1,8 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
-
-// const newName = useSelector((state) => state.user.userName)
-// console.log(newName)
 
 export const editUserName = createAsyncThunk(
     "user/editUserName",
