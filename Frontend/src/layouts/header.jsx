@@ -4,10 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/reducers/loginReducer';
 import { clearToken } from '../redux/reducers/authReducer';
 import { clearUserProfil } from '../redux/reducers/userReducer';
+import { exitEditName } from '../redux/reducers/editReducer';
 
 export default function Header() {
 
     const isLogin = useSelector((state) => state.login.isLoggedIn)
+    const name = useSelector((state) => state.user.userName)
 
     const dispatch = useDispatch()
 
@@ -15,6 +17,7 @@ export default function Header() {
         dispatch(logout())
         dispatch(clearToken())
         dispatch(clearUserProfil())
+        dispatch(exitEditName())
     }
 
     return <nav className="main-nav">
@@ -38,7 +41,7 @@ export default function Header() {
                     <Link className='main-nav-item' to="/">
                         <i className="fa fa-user-circle"></i>
                         {' '}
-                        nom
+                        {name}
                     </Link>
                     <Link className='main-nav-item' to="/" onClick={handleLogout}>
                         <i className="fa fa-sign-out"></i>

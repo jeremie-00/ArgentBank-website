@@ -22,11 +22,14 @@ const userSlice = createSlice({
       state.lastName = "";
       state.userName = "";
       state.email = "";
+    },
+    updateUserName: (state, action) => {
+      state.userName = action.payload;
     }
   },
 });
 
-export const { userProfile, clearUserProfil } = userSlice.actions;
+export const { userProfile, clearUserProfil, updateUserName } = userSlice.actions;
 
 export default userSlice.reducer;
 

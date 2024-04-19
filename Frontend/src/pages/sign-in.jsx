@@ -6,6 +6,8 @@ import { checkAuthorization } from "../redux/actions/checkAutorization";
 import { setToken } from "../redux/reducers/authReducer";
 import { setError, clearError } from "../redux/reducers/errorReducer";
 
+
+
 export default function SignIn() {
     const [email, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -27,7 +29,7 @@ export default function SignIn() {
     }
     const isError = useSelector((state) => state.error.isError)
     const messageError = useSelector((state) => state.error.message)
-    console.log(isError)
+
     return (
         <main className="main bg-dark">
             <section className="sign-in-content">
@@ -52,9 +54,9 @@ export default function SignIn() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <div class="input-remember">
+                    <div className="input-remember">
                         <input type="checkbox" id="remember-me" />
-                        <label for="remember-me">
+                        <label htmlFor="remember-me">
                             Remember me
                         </label>
                     </div>
