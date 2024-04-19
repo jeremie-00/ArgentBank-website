@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { checkAuthorization } from "../redux/actions/checkAutorization";
-import { setToken } from "../redux/reducers/authReducer";
+import { login } from "../redux/reducers/loginReducer";
 import { setError, clearError } from "../redux/reducers/errorReducer";
 
 
@@ -18,7 +18,8 @@ export default function SignIn() {
         event.preventDefault()
         dispatch(checkAuthorization({ email, password }))
             .then((response) => {
-                dispatch(setToken(response.payload.body.token))
+                const token = response.payload.body.token
+                dispatch(login(token))
                 dispatch(clearError())
                 navigate("/user")
             })

@@ -3,7 +3,6 @@ import Account from '@components/account'
 import { useDispatch, useSelector } from 'react-redux';
 
 import { userProfiles } from '../redux/actions/userProfile';
-import { login, updateLogName } from '../redux/reducers/loginReducer';
 import { userProfile, updateUserName } from '../redux/reducers/userReducer';
 import { editName, exitEditName } from '../redux/reducers/editReducer';
 import { useEffect } from 'react';
@@ -33,8 +32,8 @@ export default function User() {
     const dispatch = useDispatch()
     const { firstName, lastName, userName } = useSelector((state) => state.user)
     const edit = useSelector((state) => state.edit.editName)
-    const token = useSelector((state) => state.auth.token)
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const token = useSelector((state) => state.login.token)
+    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
     const navigate = useNavigate();
    
     useEffect(() => {
@@ -47,7 +46,6 @@ export default function User() {
         if (isLoggedIn) {
             dispatch(userProfiles({ token: token }))
             .then((response) => {
-                //dispatch(login(response.payload.body.userName))
                 dispatch(userProfile(response.payload))
             })
             .catch((error) => {
@@ -66,7 +64,7 @@ export default function User() {
         e.preventDefault()
         const newUserName = e.target[0].value
         dispatch(updateUserName(newUserName))
-        dispatch(updateLogName(newUserName))
+        //dispatch(updateLogName(newUserName))
         dispatch(editUserName({ token: token, newName: newUserName }))
             .then((response) => {
                 console.log(response)

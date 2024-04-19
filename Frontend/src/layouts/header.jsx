@@ -2,20 +2,18 @@ import logoHeader from '@assets/img/argentBankLogo.webp';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../redux/reducers/loginReducer';
-import { clearToken } from '../redux/reducers/authReducer';
 import { clearUserProfil } from '../redux/reducers/userReducer';
 import { exitEditName } from '../redux/reducers/editReducer';
 
 export default function Header() {
 
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const isLoggedIn = useSelector((state) => state.login.isLoggedIn)
     const name = useSelector((state) => state.user.userName)
 
     const dispatch = useDispatch()
 
     const handleLogout = () => {
-        //dispatch(logout())
-        dispatch(clearToken())
+        dispatch(logout())
         dispatch(clearUserProfil())
         dispatch(exitEditName())
     }
