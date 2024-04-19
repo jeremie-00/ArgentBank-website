@@ -8,7 +8,7 @@ import editReducer from "./editReducer";
 const rootReducer = combineReducers({
     user: userReducer,
     auth: authReducer,
-    login: loginReducer,
+    //login: loginReducer,
     error: errorReducer,
     edit: editReducer,
 })

@@ -8,13 +8,13 @@ import { exitEditName } from '../redux/reducers/editReducer';
 
 export default function Header() {
 
-    const isLogin = useSelector((state) => state.login.isLoggedIn)
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
     const name = useSelector((state) => state.user.userName)
 
     const dispatch = useDispatch()
 
     const handleLogout = () => {
-        dispatch(logout())
+        //dispatch(logout())
         dispatch(clearToken())
         dispatch(clearUserProfil())
         dispatch(exitEditName())
@@ -30,7 +30,7 @@ export default function Header() {
             <h1 className="sr-only">Argent Bank</h1>
         </Link>
         <div>
-            {!isLogin ? (
+            {!isLoggedIn ? (
                 <Link className='main-nav-item' to="/sign-in">
                     <i className="fa fa-user-circle"></i>
                     {' '}

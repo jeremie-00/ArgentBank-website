@@ -8,7 +8,7 @@ import { userProfile, updateUserName } from '../redux/reducers/userReducer';
 import { editName, exitEditName } from '../redux/reducers/editReducer';
 import { useEffect } from 'react';
 import { editUserName } from '../redux/actions/editUserName';
-
+import { useNavigate } from "react-router-dom";
 
 export default function User() {
 
@@ -34,18 +34,27 @@ export default function User() {
     const { firstName, lastName, userName } = useSelector((state) => state.user)
     const edit = useSelector((state) => state.edit.editName)
     const token = useSelector((state) => state.auth.token)
-    
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const navigate = useNavigate();
+   
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate('/sign-in')
+        }
+    }, [isLoggedIn])
 
     useEffect(() => {
-        dispatch(userProfiles({ token: token }))
+        if (isLoggedIn) {
+            dispatch(userProfiles({ token: token }))
             .then((response) => {
-                dispatch(login(response.payload.body.userName))
+                //dispatch(login(response.payload.body.userName))
                 dispatch(userProfile(response.payload))
             })
             .catch((error) => {
                 console.error("Erreur lors de la récupération du profil utilisateur :", error.message)
             });
-    }, [dispatch, token])
+        }
+    }, [token])
 
     const handleEditName = () => {
         dispatch(editName())
@@ -69,8 +78,6 @@ export default function User() {
 
     return <main className="main bg-dark">
         <div className="header">
-
-
             {edit ? (
                 <>
                     <h2>Edit User Info</h2>
