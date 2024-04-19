@@ -6,8 +6,6 @@ import { checkAuthorization } from "../redux/actions/checkAutorization";
 import { login } from "../redux/reducers/loginReducer";
 import { setError, clearError } from "../redux/reducers/errorReducer";
 
-
-
 export default function SignIn() {
     const [email, setUsername] = useState("")
     const [password, setPassword] = useState("")
