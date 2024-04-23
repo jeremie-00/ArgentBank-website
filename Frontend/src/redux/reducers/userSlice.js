@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { fetchLoginToken, fetchUserProfile, fetchUpdateUserName } from '../actions/fetchAPI';
 
 const initialState = {
   userName: null,
@@ -27,6 +28,18 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchLoginToken.fulfilled, (state, action) => {
+        state.token = action.payload;
+        state.isLoggedIn = true;
+      })
+      .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.userName = action.payload.userName;
+        state.firstName = action.payload.firstName;
+        state.lastName = action.payload.lastName;
+      })
+      .addCase(fetchUpdateUserName.fulfilled, (state, action) => {
+        state.userName = action.payload;
+      })
       .addMatcher(
         (action) => action.type.endsWith('/pending'),
         (state) => {
@@ -37,20 +50,9 @@ const userSlice = createSlice({
       )
       .addMatcher(
         (action) => action.type.endsWith('/fulfilled'),
-        (state, action) => {
+        (state) => {
           state.isError = false;
           state.isLoading = false;
-          if (action.type.startsWith('user/login')) {
-            state.token = action.payload;
-            state.isLoggedIn = true;
-            state.isLoading = true;
-          } else if (action.type.startsWith('user/profile')) {
-            state.userName = action.payload.userName;
-            state.firstName = action.payload.firstName;
-            state.lastName = action.payload.lastName;
-          } else if (action.type.startsWith('user/userName')) {
-            state.userName = action.payload;
-          }
         }
       )
       .addMatcher(

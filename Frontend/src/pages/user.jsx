@@ -39,7 +39,7 @@ export default function User() {
                 throw new Error('Erreur lors de la récupération des données');
             }
         } else {
-            navigate('/sign-in');
+            navigate('/');
         }
     }, [isLoggedIn]);
 

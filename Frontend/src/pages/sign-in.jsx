@@ -15,11 +15,10 @@ export default function SignIn() {
         event.preventDefault()
         dispatch(fetchLoginToken({ email, password }))
     }
+
     useEffect(() => {
         if (isLoggedIn) {
           navigate('/user')
-        } else {
-          navigate('/sign-in')
         }
       }, [isLoggedIn])
     
