@@ -1,14 +1,9 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./userReducer";
-import loginReducer from "./loginReducer";
-import errorReducer from "./errorReducer";
-import editReducer from "./editReducer";
+import userSlice from "./userSlice";
+
 
 const rootReducer = combineReducers({
-    user: userReducer,
-    login: loginReducer,
-    error: errorReducer,
-    edit: editReducer,
+    user: userSlice,
 })
 
 export default rootReducer
