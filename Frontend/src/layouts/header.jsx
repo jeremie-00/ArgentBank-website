@@ -1,21 +1,17 @@
 import logoHeader from '@assets/img/argentBankLogo.webp';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../redux/reducers/loginReducer';
-import { clearUserProfil } from '../redux/reducers/userReducer';
-import { exitEditName } from '../redux/reducers/editReducer';
+import { setLogout } from '../redux/reducers/userSlice';
 
 export default function Header() {
 
-    const isLoggedIn = useSelector((state) => state.login.isLoggedIn)
-    const name = useSelector((state) => state.user.userName)
+    const {isLoggedIn, userName} = useSelector((state) => state.user)
+    
 
     const dispatch = useDispatch()
 
     const handleLogout = () => {
-        dispatch(logout())
-        dispatch(clearUserProfil())
-        dispatch(exitEditName())
+        dispatch(setLogout())
     }
 
     return <nav className="main-nav">
@@ -39,7 +35,7 @@ export default function Header() {
                     <Link className='main-nav-item' to="/">
                         <i className="fa fa-user-circle"></i>
                         {' '}
-                        {name}
+                        {userName}
                     </Link>
                     <Link className='main-nav-item' to="/" onClick={handleLogout}>
                         <i className="fa fa-sign-out"></i>

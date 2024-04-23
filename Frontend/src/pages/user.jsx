@@ -1,14 +1,11 @@
 import Account from '@components/account'
 
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { postUserProfile } from '../redux/actions/postUserProfile';
-import { userProfile, updateUserName } from '../redux/reducers/userReducer';
-import { editName, exitEditName } from '../redux/reducers/editReducer';
-import { useEffect } from 'react';
-import { editUserName } from '../redux/actions/editUserName';
-import { useNavigate } from "react-router-dom";
-
+import { setIsEdit, setUserName } from '../redux/reducers/userSlice';
+import { fetchUserProfile, fetchUpdateUserName } from '../redux/actions/fetchAPI';
+import { useNavigate } from 'react-router-dom';
+import Spinner from '../components/spinner';
 export default function User() {
 
     const accountData = [
@@ -30,64 +27,58 @@ export default function User() {
     ]
 
     const dispatch = useDispatch()
-    const { firstName, lastName, userName } = useSelector((state) => state.user)
-    const edit = useSelector((state) => state.edit.editName)
-    const token = useSelector((state) => state.login.token)
-    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
+    const { firstName, lastName, userName, isLoggedIn, isLoading, isEdit, isError, messageError } = useSelector((state) => state.user);
+    const [newUserName, setNewUserName] = useState(userName);
     const navigate = useNavigate();
    
     useEffect(() => {
-        if (!isLoggedIn) {
-            navigate('/sign-in')
-        }
-    }, [isLoggedIn])
-
-    useEffect(() => {
         if (isLoggedIn) {
-            dispatch(postUserProfile({ token: token }))
-            .then((response) => {
-                dispatch(userProfile(response.payload))
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération du profil utilisateur :", error.message)
-            });
+            try {
+                dispatch(fetchUserProfile());
+            } catch (error) {
+                throw new Error('Erreur lors de la récupération des données');
+            }
+        } else {
+            navigate('/sign-in');
         }
-    }, [token])
+    }, [isLoggedIn]);
 
-    const handleEditName = () => {
-        dispatch(editName())
-    }
-    const handleExitEdit = () => {
-        dispatch(exitEditName())
-    }
-    const handleUpdateUserName = (e) => {
-        e.preventDefault()
-        const newUserName = e.target[0].value
-        dispatch(updateUserName(newUserName))
-        dispatch(editUserName({ token: token, newName: newUserName }))
-            .then((response) => {
-                console.log(response)
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la récupération du profil utilisateur :", error.message)
-            });
-    }
+    const handleEditName = (e) => {
+        e.preventDefault();
+        dispatch(setIsEdit());
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (isEdit) {
+            dispatch(setUserName(newUserName));
+            dispatch(fetchUpdateUserName());
+        }
+    };
+
+    // const handleChange = (e) => {
+    //     dispatch(setUserName(e.target.value));
+    // };
+
+    const handleInputChange = (e) => {
+        setNewUserName(e.target.value);
+    };
 
     return <main className="main bg-dark">
         <div className="header">
-            {edit ? (
+            {isEdit ? (
                 <>
                     <h2>Edit User Info</h2>
-                    <form onSubmit={handleUpdateUserName}>
+                    <form onSubmit={handleSubmit}>
                         <label htmlFor="userName">User Name</label>
-                        <input type="text" placeholder={userName} />
+                        <input type="text" placeholder={userName} onChange={handleInputChange}/>
                         <label htmlFor="firstName">First Name </label>
                         <input type="text" placeholder={firstName} readOnly />
                         <label htmlFor="lastName">Last Name</label>
                         <input type="text" placeholder={lastName} readOnly />
 
                         <button className="edit-button" type='submit'>Save</button>
-                        <button className="edit-button" onClick={handleExitEdit}>Exit Edit</button>
+                        <button className="edit-button" onClick={handleEditName}>Exit Edit</button>
                     </form>
                 </>
             ) : (
