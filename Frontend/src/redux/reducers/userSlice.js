@@ -1,18 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchLoginToken, fetchUserProfile, fetchUpdateUserName } from '../actions/fetchAPI';
+import { fetchUserProfile, fetchUpdateUserName } from '../actions/fetchAPI';
 
 const initialState = {
   userName: null,
   saveName: null,
   firstName: null,
   lastName: null,
-  isLoggedIn: false,
+  messageErrorUser: null,
+
   isEdit: false,
-  token: null,
-  isLoading: false,
-  messageError: null,
-  isError: false,
+  isErrorUser: false,
+  isLoadingUser: false,
 }
 
 const userSlice = createSlice({
@@ -29,10 +28,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchLoginToken.fulfilled, (state, action) => {
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
-      })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
         state.saveName = state.userName;
         state.userName = action.payload.userName;
@@ -48,24 +43,24 @@ const userSlice = createSlice({
       .addMatcher(
         (action) => action.type.endsWith('/pending'),
         (state) => {
-          state.isLoading = true;
-          state.messageError = null;
-          state.isError = false;
+          state.isLoadingUser = true;
+          state.messageErrorUser = null;
+          state.isErrorUser = false;
         }
       )
       .addMatcher(
         (action) => action.type.endsWith('/fulfilled'),
         (state) => {
-          state.isError = false;
-          state.isLoading = false;
+          state.isErrorUser = false;
+          state.isLoadingUser = false;
         }
       )
       .addMatcher(
         (action) => action.type.endsWith('/rejected'),
         (state, action) => {
-          state.isLoading = false;
-          state.messageError = action.error.message;
-          state.isError = true;
+          state.isLoadingUser = false;
+          state.messageErrorUser = action.error.message;
+          state.isErrorUser = true;
         }
       );
   },

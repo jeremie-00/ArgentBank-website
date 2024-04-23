@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 export default function Router() { 
 
-    const { isLoggedIn } = useSelector((state) => state.user)
+    const { isLoggedIn } = useSelector((state) => state.auth)
 
     const router = createBrowserRouter([
         {

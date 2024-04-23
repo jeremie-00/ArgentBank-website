@@ -26,7 +26,7 @@ export const fetchLoginToken = createAsyncThunk(
 export const fetchUserProfile = createAsyncThunk(
     'user/profile',
     async (_, thunkAPI) => {
-        const { token } = thunkAPI.getState().user;
+        const { token } = thunkAPI.getState().auth;
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/profile', {
                 method: 'POST',
@@ -48,7 +48,8 @@ export const fetchUserProfile = createAsyncThunk(
 export const fetchUpdateUserName = createAsyncThunk(
     'user/userName',
     async (_, thunkAPI) => {
-        const { token, userName } = thunkAPI.getState().user;
+        const { token } = thunkAPI.getState().auth;
+        const { userName } = thunkAPI.getState().user;
         const requestBody = {
             userName: userName,
         }

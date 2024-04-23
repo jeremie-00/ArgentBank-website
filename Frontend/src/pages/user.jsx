@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsEdit, setUserName } from '../redux/reducers/userSlice';
 import { fetchUserProfile, fetchUpdateUserName } from '../redux/actions/fetchAPI';
-import { useNavigate } from 'react-router-dom';
 
 export default function User() {
 
@@ -27,9 +26,9 @@ export default function User() {
     ]
 
     const dispatch = useDispatch()
-    const { firstName, lastName, userName, isLoggedIn, isEdit, isError, messageError } = useSelector((state) => state.user);
+    const { firstName, lastName, userName, isEdit, isErrorUser, messageErrorUser } = useSelector((state) => state.user);
+    const { isLoggedIn }= useSelector((state) => state.auth)
     const [newUserName, setNewUserName] = useState(userName);
-    const navigate = useNavigate();
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -82,7 +81,7 @@ export default function User() {
 
                     </>
 
-                    {isError ? <div><br />{messageError}</div> : <></>}
+                    {isErrorUser ? <div><br />{messageErrorUser}</div> : <></>}
                 </>
             )}
 

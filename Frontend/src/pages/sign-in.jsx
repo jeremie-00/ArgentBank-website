@@ -9,7 +9,8 @@ export default function SignIn() {
     const [password, setPassword] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { isLoggedIn, isError, messageError } = useSelector((state) => state.user)
+    const { isErrorUser, messageErrorUser } = useSelector((state) => state.user)
+    const { isLoggedIn }= useSelector((state) => state.auth)
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -56,7 +57,7 @@ export default function SignIn() {
                     <button type="submit" className="sign-in-button">
                         Sign In
                     </button>
-                    {isError ? (<div className="error">{messageError}</div>) : (<></>)}
+                    {isErrorUser ? (<div className="error">{messageErrorUser}</div>) : (<></>)}
                 </form>
             </section>
         </main>
