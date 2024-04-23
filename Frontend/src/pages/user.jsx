@@ -27,10 +27,10 @@ export default function User() {
     ]
 
     const dispatch = useDispatch()
-    const { firstName, lastName, userName, isLoggedIn, isLoading, isEdit, isError, messageError } = useSelector((state) => state.user);
+    const { firstName, lastName, userName, isLoggedIn, isEdit, isError, messageError } = useSelector((state) => state.user);
     const [newUserName, setNewUserName] = useState(userName);
     const navigate = useNavigate();
-   
+
     useEffect(() => {
         if (isLoggedIn) {
             try {
@@ -51,15 +51,12 @@ export default function User() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isEdit) {
-            dispatch(setUserName(newUserName));
-            dispatch(fetchUpdateUserName());
+            const actions = [setUserName(newUserName), fetchUpdateUserName(), setIsEdit()]
+            actions.forEach((action) => {
+                dispatch(action)
+            })
+
         }
-    };
-
-
-    const handleInputChange = (e) => {
-        // dispatch(setUserName(e.target.value));
-        setNewUserName(e.target.value);
     };
 
     return <main className="main bg-dark">
@@ -69,7 +66,7 @@ export default function User() {
                     <h2>Edit User Info</h2>
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="userName">User Name</label>
-                        <input type="text" placeholder={userName} onChange={handleInputChange}/>
+                        <input type="text" placeholder={userName} onChange={(e) => setNewUserName(e.target.value)} />
                         <label htmlFor="firstName">First Name </label>
                         <input type="text" placeholder={firstName} readOnly />
                         <label htmlFor="lastName">Last Name</label>
@@ -81,8 +78,13 @@ export default function User() {
                 </>
             ) : (
                 <>
-                    <h1>Welcome back<br />{userName}</h1>
-                    <button className="edit-button" onClick={handleEditName}>Edit Name</button>
+                    <>
+                        <h1>Welcome back<br />{firstName} {lastName} !</h1>
+                        <button className="edit-button" onClick={handleEditName}>Edit Name</button>
+
+                    </>
+
+                    {isError ? <div><br />{messageError}</div> : <></>}
                 </>
             )}
 

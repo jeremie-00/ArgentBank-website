@@ -4,6 +4,7 @@ import { fetchLoginToken, fetchUserProfile, fetchUpdateUserName } from '../actio
 
 const initialState = {
   userName: null,
+  saveName: null,
   firstName: null,
   lastName: null,
   isLoggedIn: false,
@@ -33,12 +34,16 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
+        state.saveName = state.userName;
         state.userName = action.payload.userName;
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
       })
       .addCase(fetchUpdateUserName.fulfilled, (state, action) => {
         state.userName = action.payload;
+      })
+      .addCase(fetchUpdateUserName.rejected, (state) => {
+        state.userName = state.saveName;
       })
       .addMatcher(
         (action) => action.type.endsWith('/pending'),
