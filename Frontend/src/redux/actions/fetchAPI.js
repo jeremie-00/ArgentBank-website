@@ -15,7 +15,7 @@ export const fetchLoginToken = createAsyncThunk(
 
             const data = await response.json()
             const { token } = data.body
-            return token
+            return { token }
 
         } catch (error) {
             throw new Error("Erreur lors de l'authentification");
@@ -65,7 +65,7 @@ export const fetchUpdateUserName = createAsyncThunk(
 
             const profileData = await response.json()
             const { userName } = profileData.body
-            return userName
+            return { userName }
         } catch (error) {
             throw new Error("Erreur lors de l'envoi des données userName")
         }

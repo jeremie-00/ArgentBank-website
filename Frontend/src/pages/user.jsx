@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsEdit, setUserName } from '../redux/reducers/userSlice';
 import { fetchUserProfile, fetchUpdateUserName } from '../redux/actions/fetchAPI';
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../components/spinner';
+
 export default function User() {
 
     const accountData = [
@@ -38,8 +38,6 @@ export default function User() {
             } catch (error) {
                 throw new Error('Erreur lors de la récupération des données');
             }
-        } else {
-            navigate('/');
         }
     }, [isLoggedIn]);
 

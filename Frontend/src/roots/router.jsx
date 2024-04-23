@@ -28,7 +28,7 @@ export default function Router() {
                 },
                 {
                     path: '/user',
-                    element: isLoggedIn ? <User /> : <Navigate to='/sign-in' />,
+                    element: isLoggedIn ? <User /> : <Navigate to='/' />,
                 },
             ]
         }

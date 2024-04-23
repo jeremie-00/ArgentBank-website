@@ -30,7 +30,7 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchLoginToken.fulfilled, (state, action) => {
-        state.token = action.payload;
+        state.token = action.payload.token;
         state.isLoggedIn = true;
       })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
@@ -40,7 +40,7 @@ const userSlice = createSlice({
         state.lastName = action.payload.lastName;
       })
       .addCase(fetchUpdateUserName.fulfilled, (state, action) => {
-        state.userName = action.payload;
+        state.userName = action.payload.userName;
       })
       .addCase(fetchUpdateUserName.rejected, (state) => {
         state.userName = state.saveName;
