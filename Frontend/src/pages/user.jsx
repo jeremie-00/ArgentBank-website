@@ -56,11 +56,9 @@ export default function User() {
         }
     };
 
-    // const handleChange = (e) => {
-    //     dispatch(setUserName(e.target.value));
-    // };
 
     const handleInputChange = (e) => {
+        // dispatch(setUserName(e.target.value));
         setNewUserName(e.target.value);
     };
 
