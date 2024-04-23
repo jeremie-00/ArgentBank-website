@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
-export const userProfiles = createAsyncThunk(
+export const postUserProfile = createAsyncThunk(
     "user/profile",
     async ({token}) => {
         try {

@@ -4,13 +4,15 @@ import RootOutlet from "./rootOutlet";
 import Home from "@pages/home";
 import SignIn from "@pages/sign-in";
 import User from "@pages/user";
+import PageError from '../error';
+
 
 export default function Router() {
     const router = createBrowserRouter([
         {
             path: '/',
             element: <RootOutlet />,
-            errorElement: <div>error</div>,
+            errorElement: <PageError />,
             children: [
                 {
                     path: '/',

@@ -2,7 +2,7 @@ import Account from '@components/account'
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userProfiles } from '../redux/actions/userProfile';
+import { postUserProfile } from '../redux/actions/postUserProfile';
 import { userProfile, updateUserName } from '../redux/reducers/userReducer';
 import { editName, exitEditName } from '../redux/reducers/editReducer';
 import { useEffect } from 'react';
@@ -44,7 +44,7 @@ export default function User() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            dispatch(userProfiles({ token: token }))
+            dispatch(postUserProfile({ token: token }))
             .then((response) => {
                 dispatch(userProfile(response.payload))
             })
@@ -64,7 +64,6 @@ export default function User() {
         e.preventDefault()
         const newUserName = e.target[0].value
         dispatch(updateUserName(newUserName))
-        //dispatch(updateLogName(newUserName))
         dispatch(editUserName({ token: token, newName: newUserName }))
             .then((response) => {
                 console.log(response)
