@@ -54,7 +54,6 @@ export default function User() {
             actions.forEach((action) => {
                 dispatch(action)
             })
-
         }
     };
 
@@ -67,7 +66,7 @@ export default function User() {
                     <form onSubmit={handleSubmit}>
                         <div className="input-wrapper">
                             <label htmlFor="userName">User Name</label>
-                            <input type="text" placeholder={userName} onChange={(e) => setNewUserName(e.target.value)} />
+                            <input type="text" onChange={(e) => setNewUserName(e.target.value)} required />
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="firstName">First Name </label>

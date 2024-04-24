@@ -41,16 +41,19 @@
             font-size: 1rem;
             font-weight: normal;
         }
+
         .account-amount {
             margin: 0;
             font-size: 2.5rem;
             font-weight: bold;
         }
+
         .account-amount-description {
             margin: 0;
         }
     }
 }
+
 .transaction-button {
     display: block;
     width: 100%;
@@ -62,6 +65,7 @@
     background-color: #00bc77;
     color: #fff;
 }
+
 @media (min-width: 720px) {
     .account {
         flex-direction: row;

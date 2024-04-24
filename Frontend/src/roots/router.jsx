@@ -9,9 +9,9 @@ import PageError from '@pages/error';
 
 import { useSelector } from 'react-redux';
 
-export default function Router() { 
+export default function Router() {
 
-    const { isLoggedIn, isLoadingAuth } = useSelector((state) => state.auth)
+    const { isLoggedIn } = useSelector((state) => state.auth)
 
     const router = createBrowserRouter([
         {

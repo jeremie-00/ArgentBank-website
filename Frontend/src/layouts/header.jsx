@@ -1,5 +1,5 @@
 import logoHeader from '@assets/img/argentBankLogo.webp';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLogout } from '../redux/reducers/userSlice';
 import { setResetToken } from '../redux/reducers/authSlice';
@@ -29,11 +29,11 @@ export default function Header() {
         </Link>
         < div className='main-nav-items'>
             {!isLoggedIn ? (
-                <Link className='main-nav-item' to="/sign-in">
+                <NavLink className='main-nav-item' to="/sign-in">
                     <i className="fa fa-user-circle"></i>
                     {' '}
                     Sign In
-                </Link>
+                </NavLink>
             ) : (
                 <>
                     <Link className='main-nav-item' to="/">

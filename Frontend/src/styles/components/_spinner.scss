@@ -12,16 +12,18 @@
             border: 10px solid #ccc;
             border-top: 10px solid #00bc77;
         }
+
         &.medium {
             @include set-size(40px, 40px);
             border: 6px solid #ccc;
             border-top: 6px solid #00bc77;
         }
+
         &.small {
             @include set-size(12px, 12px);
             border: 2px solid #ccc;
             border-top: 2px solid #00bc77;
-    
+
         }
     }
 

@@ -23,7 +23,7 @@ export default function Home() {
                 is always safe.`
         }
     ]
-    
+
     return <main>
         <div className="hero">
             <section className="hero-content">

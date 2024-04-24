@@ -1,5 +1,5 @@
 .footer {
-    @include flex($direction: row, $justify: center, $align: unset);
-    border-top: 2px solid #ccc;
-    padding: 2rem 0 1.5rem;
-  }
+  @include flex($direction: row, $justify: center, $align: unset);
+  border-top: 2px solid #ccc;
+  padding: 2rem 0 1.5rem;
+}
