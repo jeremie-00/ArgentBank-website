@@ -35,8 +35,6 @@ export default function SignIn() {
                 <i className="fa fa-user-circle sign-in-icon"></i>
                 <h1>Sign In</h1>
 
-
-
                 <form onSubmit={handleSubmit}>
                     {isLoadingAuth ? (<Spinner sizeCategory="large" />) : (
                         <>

@@ -61,28 +61,38 @@ export default function User() {
     return <main className="main bg-dark">
         <div className="header">
             {isEdit ? (
-                <>
+                <section className='sign-in-content'>
+                    <i className="fa fa-user-circle sign-in-icon"></i>
                     <h2>Edit User Info</h2>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="userName">User Name</label>
-                        <input type="text" placeholder={userName} onChange={(e) => setNewUserName(e.target.value)} />
-                        <label htmlFor="firstName">First Name </label>
-                        <input type="text" placeholder={firstName} readOnly />
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" placeholder={lastName} readOnly />
-
-                        <button className="edit-button" type='submit'>Save</button>
-                        <button className="edit-button" onClick={handleEditName}>Exit Edit</button>
+                        <div className="input-wrapper">
+                            <label htmlFor="userName">User Name</label>
+                            <input type="text" placeholder={userName} onChange={(e) => setNewUserName(e.target.value)} />
+                        </div>
+                        <div className="input-wrapper">
+                            <label htmlFor="firstName">First Name </label>
+                            <input type="text" placeholder={firstName} readOnly />
+                        </div>
+                        <div className="input-wrapper">
+                            <label htmlFor="lastName">Last Name</label>
+                            <input type="text" placeholder={lastName} readOnly />
+                        </div>
+                        <div className="input-wrapper">
+                            <button className="edit-button" type='submit'>Save</button>
+                        </div>
+                        <div className="input-wrapper">
+                            <button className="edit-button exit-edit" onClick={handleEditName}>Exit Edit</button>
+                        </div>
                     </form>
-                </>
+                </section>
             ) : (
                 <>
                     <>
-                        <h1>Welcome back<br /> {isLoadingUser ? <Spinner  sizeCategory="medium"/> : <> { firstName } { lastName } !</>}  </h1>
+                        <h1>Welcome back<br /> {isLoadingUser ? <Spinner sizeCategory="medium" /> : <> {firstName} {lastName} !</>}  </h1>
                         <button className="edit-button" onClick={handleEditName}>Edit Name</button>
 
                     </>
-                    
+
 
                     {isErrorUser ? <div><br />{messageErrorUser}</div> : <></>}
                 </>
