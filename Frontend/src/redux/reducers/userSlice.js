@@ -28,41 +28,37 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
+      .addCase(fetchUserProfile.pending, (state) => {
+        state.isLoadingUser = true;
+      })
       .addCase(fetchUserProfile.fulfilled, (state, action) => {
-        state.saveName = state.userName;
+        state.isLoadingUser = false;
+        state.saveName = action.payload.userName;
         state.userName = action.payload.userName;
         state.firstName = action.payload.firstName;
         state.lastName = action.payload.lastName;
       })
-      .addCase(fetchUpdateUserName.fulfilled, (state, action) => {
-        state.userName = action.payload.userName;
+      .addCase(fetchUserProfile.rejected, (state, action) => {
+        state.isLoadingUser = false;
+        state.messageErrorUser = action.error.message;
+        state.isErrorUser = true;
       })
-      .addCase(fetchUpdateUserName.rejected, (state) => {
+
+
+      .addCase(fetchUpdateUserName.pending, (state) => {
+        state.isLoadingUser = true;
+      })
+      .addCase(fetchUpdateUserName.fulfilled, (state) => {
+        state.isLoadingUser = false;
+        state.saveName = state.userName;
+      })
+      .addCase(fetchUpdateUserName.rejected, (state, action) => {
+        state.isLoadingUser = false;
         state.userName = state.saveName;
-      })
-      .addMatcher(
-        (action) => action.type.endsWith('/pending'),
-        (state) => {
-          state.isLoadingUser = true;
-          state.messageErrorUser = null;
-          state.isErrorUser = false;
-        }
-      )
-      .addMatcher(
-        (action) => action.type.endsWith('/fulfilled'),
-        (state) => {
-          state.isErrorUser = false;
-          state.isLoadingUser = false;
-        }
-      )
-      .addMatcher(
-        (action) => action.type.endsWith('/rejected'),
-        (state, action) => {
-          state.isLoadingUser = false;
-          state.messageErrorUser = action.error.message;
-          state.isErrorUser = true;
-        }
-      );
+        state.messageErrorUser = action.error.message;
+        state.isErrorUser = true;
+      });
   },
 });
 

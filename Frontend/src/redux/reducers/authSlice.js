@@ -20,19 +20,17 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchLoginToken.pending, (state) => {
-                state.isLoggedIn = false;
                 state.isLoadingAuth = true;
             })
             .addCase(fetchLoginToken.rejected, (state, action) => {
-                state.isLoggedIn = false;
                 state.isLoadingAuth = false;
                 state.messageErrorAuth = action.error.message;
                 state.isErrorAuth = true;
             })
             .addCase(fetchLoginToken.fulfilled, (state, action) => {
+                state.isLoadingAuth = false;
                 state.token = action.payload.token;
                 state.isLoggedIn = true;
-                state.isLoadingAuth = false;
             });
 
     },
