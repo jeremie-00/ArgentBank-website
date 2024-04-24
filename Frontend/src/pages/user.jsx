@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setIsEdit, setUserName } from '../redux/reducers/userSlice';
 import { fetchUserProfile, fetchUpdateUserName } from '../redux/actions/fetchAPI';
 
+import Spinner from '@components/spinner';
+
 export default function User() {
 
     const accountData = [
@@ -26,8 +28,8 @@ export default function User() {
     ]
 
     const dispatch = useDispatch()
-    const { firstName, lastName, userName, isEdit, isErrorUser, messageErrorUser } = useSelector((state) => state.user);
-    const { isLoggedIn }= useSelector((state) => state.auth)
+    const { firstName, lastName, userName, isEdit, isErrorUser, messageErrorUser, isLoadingUser } = useSelector((state) => state.user);
+    const { isLoggedIn } = useSelector((state) => state.auth)
     const [newUserName, setNewUserName] = useState(userName);
 
     useEffect(() => {
@@ -76,10 +78,11 @@ export default function User() {
             ) : (
                 <>
                     <>
-                        <h1>Welcome back<br />{firstName} {lastName} !</h1>
+                        <h1>Welcome back<br /> {isLoadingUser ? <Spinner  sizeCategory="medium"/> : <> { firstName } { lastName } !</>}  </h1>
                         <button className="edit-button" onClick={handleEditName}>Edit Name</button>
 
                     </>
+                    
 
                     {isErrorUser ? <div><br />{messageErrorUser}</div> : <></>}
                 </>

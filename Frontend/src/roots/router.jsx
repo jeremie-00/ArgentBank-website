@@ -6,11 +6,12 @@ import SignIn from "@pages/sign-in";
 import User from "@pages/user";
 import PageError from '@pages/error';
 
+
 import { useSelector } from 'react-redux';
 
 export default function Router() { 
 
-    const { isLoggedIn } = useSelector((state) => state.auth)
+    const { isLoggedIn, isLoadingAuth } = useSelector((state) => state.auth)
 
     const router = createBrowserRouter([
         {

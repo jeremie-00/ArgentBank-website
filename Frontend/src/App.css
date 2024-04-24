@@ -55,11 +55,15 @@ body,
   font-weight: bold;
   color: #2c3e50;
 }
-.main-nav .main-nav-item {
+.main-nav .main-nav-items {
+  display: flex;
+  align-items: center;
+}
+.main-nav .main-nav-items .main-nav-item {
   text-decoration: none;
   margin-right: 0.5rem;
 }
-.main-nav .main-nav-item:hover {
+.main-nav .main-nav-items .main-nav-item:hover {
   text-decoration: underline;
 }
 .main-nav .main-nav-logo {
@@ -108,6 +112,42 @@ body,
     flex-direction: row;
   }
 }
+.contenaire-spinner {
+  padding: 5px;
+  display: inline-flex;
+}
+.contenaire-spinner .spinner {
+  border-radius: 50%;
+  box-sizing: border-box;
+  animation: spin 1s linear infinite;
+}
+.contenaire-spinner .spinner.large {
+  width: 80px;
+  height: 80px;
+  border: 10px solid #ccc;
+  border-top: 10px solid #00bc77;
+}
+.contenaire-spinner .spinner.medium {
+  width: 40px;
+  height: 40px;
+  border: 6px solid #ccc;
+  border-top: 6px solid #00bc77;
+}
+.contenaire-spinner .spinner.small {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #ccc;
+  border-top: 2px solid #00bc77;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .hero {
   background-image: url("../src/assets/img/bank-tree.webP");
   background-position: 0 -50px;
