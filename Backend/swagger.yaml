@@ -1,9 +1,9 @@
-swagger: '2.0'
+swagger: "2.0"
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: '1.0.0'
-  termsOfService: 'http://swagger.io/terms/'
+  version: "1.0.0"
+  termsOfService: "http://swagger.io/terms/"
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -21,17 +21,17 @@ paths:
           description: Login Payload
           required: true
           schema:
-            $ref: '#/definitions/Login'
+            $ref: "#/definitions/Login"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Login Successfully
           schema:
-            $ref: '#/definitions/LoginResponse'
-        '400':
+            $ref: "#/definitions/LoginResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
   /user/signup:
     post:
@@ -45,17 +45,17 @@ paths:
           description: Signup Payload
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Signup Successfully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
   /user/profile:
     post:
@@ -66,15 +66,15 @@ paths:
       summary: User Profile API
       description: API for fetching a user profile
       #produces:
-       # - application/json
+      # - application/json
       responses:
-        '200':
+        "200":
           description: User profile retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
           description: Internal Server Error
     put:
       security:
@@ -89,17 +89,44 @@ paths:
           description: Update user profile attributes
           required: true
           schema:
-            $ref: '#/definitions/UserProfile'
+            $ref: "#/definitions/UserProfile"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: User profile retrieved successully
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '400':
+            $ref: "#/definitions/ApiResponse"
+        "400":
           description: Invalid Fields
-        '500':
+        "500":
+          description: Internal Server Error
+  /transactions/{monthlyId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Get transactions for current month grouped by account
+      description: API for fetching all transactions for the current month, grouped by account
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: monthlyId
+          description: number of the month
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Transactions retrived Successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Transactions"
+        "401":
+          description: Unauthorized
+        "500":
           description: Internal Server Error
 securityDefinitions:
   Bearer:
@@ -156,3 +183,41 @@ definitions:
     properties:
       userName:
         type: string
+  Transaction:
+    type: object
+    properties: 
+      transactionId:
+        type: integer
+        description: Unique identifier for the transaction
+      date:
+        type: string
+        format: date
+        description: Transaction date
+      description:
+        type: string
+        description: Name of purchasing store
+      amount:
+        type: number
+        description: Value of transaction
+      balance:
+        type: number
+        description: Value of balance
+      typeTransaction:
+        type: string
+        description: Type of the transaction (debit, credit)   
+      category:
+        type: string
+        description: Name of the category for organization
+      note:
+        type: string
+        description: Additional and Personnal note for the User
+  Transactions:
+    type: object
+    properties: 
+      bankAccountId: 
+        type: string
+      transactions:
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+
