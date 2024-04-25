@@ -128,6 +128,61 @@ paths:
           description: Unauthorized
         "500":
           description: Internal Server Error
+  /transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Get transaction
+      description: API for fetching transaction
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: transactionId
+          description: number of transaction
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Transactions retrived Successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Transaction"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+    patch:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Update transaction
+      description: API for update transaction
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Updated transaction
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateTransaction"
+      responses:
+        "200":
+          description: Transactions retrived Successfully
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/UpdateTransaction"
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -220,4 +275,13 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Transaction'
-
+  UpdateTransaction:
+    type: object
+    properties:
+      transactionId:
+        type: integer
+      category:
+        type: string
+      note:
+        type: string
+ 
