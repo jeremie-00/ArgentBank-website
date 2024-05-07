@@ -1,7 +1,7 @@
 import logoHeader from '@assets/img/argentBankLogo.webp';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { setLogout } from '../redux/reducers/userSlice';
+import { setResetUser } from '../redux/reducers/userSlice';
 import { setResetToken } from '../redux/reducers/authSlice';
 
 import Spinner from '@components/spinner';
@@ -16,7 +16,7 @@ export default function Header() {
     const handleLogout = () => {
         localStorage.removeItem("token")
         dispatch(setResetToken())
-        dispatch(setLogout())
+        dispatch(setResetUser())
     }
 
     return <nav className="main-nav">
