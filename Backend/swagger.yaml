@@ -113,9 +113,14 @@ paths:
         - application/json
       parameters:
         - in: query
-          name: date
+          name: Date
           description: Transaction date (optional)
           type: string
+        - in: header
+          name: Authorization
+          type: string
+          description: tokken
+          required: true
       responses:
         "200":
           description: Transactions retrived Successfully
@@ -143,6 +148,11 @@ paths:
           description: number of transaction
           required: true
           type: string
+        - in: header
+          name: Authorization
+          type: string
+          description: tokken
+          required: true
       responses:
         "200":
           description: Transactions retrived Successfully
@@ -171,12 +181,18 @@ paths:
           description: number of transaction
           required: true
           type: string
+        - in: header
+          name: Authorization
+          type: string
+          description: tokken
+          required: true
         - in: body
           name: body
           description: Updated transaction
           required: true
           schema:
             $ref: "#/definitions/UpdateTransaction"
+
       responses:
         "200":
           description: Transactions retrived Successfully
