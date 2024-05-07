@@ -101,21 +101,20 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-  /transactions/{monthlyId}:
+  /transactions/{date}:
     get:
       security:
         - Bearer: []
       tags:
         - Transactions Module
       summary: Get transactions for current month grouped by account
-      description: API for fetching all transactions for the current month, grouped by account
+      description: This API endpoint fetches all transactions for the specified month if a date parameter is provided. If no date parameter is provided, it automatically retrieves transactions for the current month.
       produces:
         - application/json
       parameters:
-        - in: path
-          name: monthlyId
-          description: number of the month
-          required: true
+        - in: query
+          name: date
+          description: Transaction date (optional)
           type: string
       responses:
         "200":
@@ -165,6 +164,11 @@ paths:
       produces:
         - application/json
       parameters:
+        - in: path
+          name: transactionId
+          description: number of transaction
+          required: true
+          type: string
         - in: body
           name: body
           description: Updated transaction
