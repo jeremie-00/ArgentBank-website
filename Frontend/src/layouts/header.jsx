@@ -14,6 +14,7 @@ export default function Header() {
     const dispatch = useDispatch()
 
     const handleLogout = () => {
+        localStorage.removeItem("token")
         dispatch(setResetToken())
         dispatch(setLogout())
     }
@@ -36,7 +37,7 @@ export default function Header() {
                 </NavLink>
             ) : (
                 <>
-                    <Link className='main-nav-item' to="/">
+                    <Link className='main-nav-item' to="/user">
                         <i className="fa fa-user-circle"></i>
                         {' '}
                         {isLoadingUser ? <Spinner sizeCategory="small" /> : <> {userName} </>}

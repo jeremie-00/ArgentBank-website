@@ -2,20 +2,20 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { fetchLoginToken } from '../actions/fetchAPI';
 
-const initialState = {
-    token: null,
+const initialState = () =>  ({
+    token: localStorage.getItem("token"),
     messageErrorAuth: null,
     
     isLoadingAuth: false,
-    isLoggedIn: false,
+    isLoggedIn: localStorage.getItem("token") !== null,
     isErrorAuth: false,
-}
+})
 
 const authSlice = createSlice({
     name: 'auth',
-    initialState: initialState,
+    initialState: initialState(),
     reducers: {
-        setResetToken: () => initialState,
+        setResetToken: () => initialState(),
     },
     extraReducers: (builder) => {
         builder
@@ -31,6 +31,9 @@ const authSlice = createSlice({
                 state.isLoadingAuth = false;
                 state.token = action.payload.token;
                 state.isLoggedIn = true;
+                if (action.payload.rememberMe) {
+                    localStorage.setItem("token", action.payload.token)
+                }
             });
 
     },

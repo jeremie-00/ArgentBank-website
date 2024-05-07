@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchLoginToken = createAsyncThunk(
     'user/login',
-    async ({ email, password }) => {
+    async ({ email, password, rememberMe }) => {
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/login', {
                 method: 'POST',
@@ -15,7 +15,7 @@ export const fetchLoginToken = createAsyncThunk(
 
             const data = await response.json()
             const { token } = data.body
-            return { token }
+            return { token, rememberMe }
 
         } catch (error) {
             throw new Error("Erreur lors de l'authentification");

@@ -8,6 +8,9 @@ import Spinner from '@components/spinner';
 export default function SignIn() {
     const [email, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const [rememberMe, setRememberMe] = useState(null)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -15,9 +18,9 @@ export default function SignIn() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        dispatch(fetchLoginToken({ email, password }))
+        dispatch(fetchLoginToken({ email, password, rememberMe }))
     }
-
+    
     useEffect(() => {
         if (isLoggedIn) {
             navigate('/user')
@@ -55,7 +58,7 @@ export default function SignIn() {
                                 />
                             </div>
                             <div className="input-remember">
-                                <input type="checkbox" id="remember-me" />
+                                <input type="checkbox" id="remember-me" onChange={(e) => setRememberMe(e.target.checked)}/>
                                 <label htmlFor="remember-me">
                                     Remember me
                                 </label>
