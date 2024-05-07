@@ -1,5 +1,7 @@
 import Feature from "@components/feature"
-
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserProfile } from '../redux/actions/fetchAPI';
 export default function Home() {
 
     const featureData = [
@@ -23,6 +25,18 @@ export default function Home() {
                 is always safe.`
         }
     ]
+
+    const dispatch = useDispatch()
+    const { isLoggedIn } = useSelector((state) => state.auth)
+    useEffect(() => {
+        if (isLoggedIn) {
+            try {
+                dispatch(fetchUserProfile());
+            } catch (error) {
+                throw new Error('Erreur lors de la récupération des données');
+            }
+        }
+    }, [isLoggedIn]);
 
     return <main>
         <div className="hero">
