@@ -5,20 +5,20 @@ import { fetchUserProfile } from "../redux/actions/fetchAPI";
 export default function Home() {
   const featureData = [
     {
-      srcImg: "../src/assets/img/icon-chat.webP",
+      srcImg: "../../../public/assets/img/icon-chat.webP",
       title: "You are our #1 priority",
       txt: `Need to talk to a representative? 
                   You can get in touch through our 24/7 
                   chat or through a phone call in less than 5 minutes.`,
     },
     {
-      srcImg: "../src/assets/img/icon-money.webP",
+      srcImg: "../../../public/assets/img/icon-money.webP",
       title: "More savings means higher rates",
       txt: `The more you save with us,
                 the higher your interest rate will be!`,
     },
     {
-      srcImg: "../src/assets/img/icon-security.webP",
+      srcImg: "../../../public/assets/img/icon-security.webP",
       title: "Security you can trust",
       txt: `We use top of the line encryption to make sure your data and money
                 is always safe.`,
