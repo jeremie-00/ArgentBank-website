@@ -82,6 +82,7 @@ export default function User() {
               <div className="input-wrapper">
                 <label htmlFor="userName">User Name</label>
                 <input
+                  placeholder={userName}
                   type="text"
                   onChange={(e) => setNewUserName(e.target.value)}
                   required
