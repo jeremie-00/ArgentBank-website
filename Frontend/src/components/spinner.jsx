@@ -1,9 +1,15 @@
-export default function Spinner({ sizeCategory }) {
-    return (
-        <div className='contenaire-spinner'>
-            <div className={`spinner ${sizeCategory}`}>
+import PropTypes from "prop-types";
 
-            </div>
-        </div>
-    )
+function Spinner({ sizeCategory }) {
+  return (
+    <div className="contenaire-spinner">
+      <div className={`spinner ${sizeCategory}`}></div>
+    </div>
+  );
 }
+
+Spinner.propTypes = {
+  sizeCategory: PropTypes.string.isRequired,
+};
+
+export default Spinner;
